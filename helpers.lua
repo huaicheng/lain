@@ -7,16 +7,13 @@
 --]]
 
 
-local debug      = require("debug")
-local io         = { lines = io.lines,
-                     open  = io.open,
-                     popen = io.popen }
-local rawget     = rawget
-local table      = { sort  = table.sort }
-
 local easy_async = require("awful.spawn").easy_async
 local timer      = require("gears.timer")
-local wibox      = require("wibox")
+local debug      = require("debug")
+local io         = { lines = io.lines,
+                     open  = io.open }
+local rawget     = rawget
+local table      = { sort  = table.sort }
 
 -- Lain helper functions for internal use
 -- lain.helpers
@@ -92,8 +89,9 @@ end
 
 helpers.timer_table = {}
 
-function helpers.newtimer(_name, timeout, fun, nostart)
-    local name = timeout
+function helpers.newtimer(name, timeout, fun, nostart, stoppable)
+    if not name or #name == 0 then return end
+    name = (stoppable and name) or timeout
     if not helpers.timer_table[name] then
         helpers.timer_table[name] = timer({ timeout = timeout })
         helpers.timer_table[name]:start()
@@ -102,21 +100,12 @@ function helpers.newtimer(_name, timeout, fun, nostart)
     if not nostart then
         helpers.timer_table[name]:emit_signal("timeout")
     end
+    return stoppable and helpers.timer_table[name]
 end
 
 -- }}}
 
 -- {{{ Pipe operations
-
--- return the full output of an input command (synchronous pipe)
--- @param cmd the input command
--- @return command output (string)
-function helpers.read_pipe(cmd)
-   local f = io.popen(cmd)
-   local output = f:read("*all")
-   f:close()
-   return output
-end
 
 -- run a command and execute a function on its output (asynchronous pipe)
 -- @param cmd the input command
@@ -173,14 +162,6 @@ function helpers.spairs(t)
             return keys[i], t[keys[i]]
         end
     end
-end
-
--- create a lain textbox widget
-function helpers.make_widget_textbox()
-    local w = wibox.widget.textbox('')
-    local t = wibox.widget.base.make_widget(w)
-    t.widget = w
-    return t
 end
 
 -- }}}

@@ -10,15 +10,10 @@ Layouts, widgets and utilities for Awesome WM 4.x
 :License: GNU-GPL2_
 :Source: https://github.com/copycat-killer/lain
 
-Warning
--------
-
-If you still have to use branch 3.5.x, you can refer to the commit 301faf5_, but be aware that it's no longer supported.
-
 Description
 -----------
 
-Successor of awesome-vain_, this module provides new layouts, a set of widgets and utility functions, with the aim of improving Awesome_ usability and configurability.
+Successor of awesome-vain_, this module provides alternative layouts, asynchronous widgets and utility functions for Awesome_ WM.
 
 Read the wiki_ for all the info.
 
@@ -37,7 +32,7 @@ Just make sure that:
 
 - You eventually update ``wiki`` submodule with a thorough section.
 
-Contributed widgets have to be put in ``lain/widgets/contrib``.
+Contributed widgets have to be put in ``widget/contrib``.
 
 Screenshots
 -----------
@@ -47,7 +42,6 @@ Screenshots
 .. image:: http://i.imgur.com/STCPcaJ.png
 
 .. _GNU-GPL2: http://www.gnu.org/licenses/gpl-2.0.html
-.. _301faf5: https://github.com/copycat-killer/lain/tree/301faf5370d045e94c9c344acb0fdac84a2f25a6
 .. _awesome-vain: https://github.com/vain/awesome-vain
 .. _Awesome: https://github.com/awesomeWM/awesome
 .. _wiki: https://github.com/copycat-killer/lain/wiki
